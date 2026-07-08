@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_scr_callback_route_user,scr.callback.route user,model_scr_callback_route,smart_callback_routing.group_scr_user,1,0,0,0
+access_scr_callback_route_manager,scr.callback.route manager,model_scr_callback_route,smart_callback_routing.group_scr_manager,1,1,1,1
+access_scr_extension_user,scr.extension user,model_scr_extension,smart_callback_routing.group_scr_user,1,0,0,0
+access_scr_extension_manager,scr.extension manager,model_scr_extension,smart_callback_routing.group_scr_manager,1,1,1,1
+access_scr_routing_log_user,scr.routing.log user,model_scr_routing_log,smart_callback_routing.group_scr_user,1,0,0,0
+access_scr_routing_log_manager,scr.routing.log manager,model_scr_routing_log,smart_callback_routing.group_scr_manager,1,1,1,1

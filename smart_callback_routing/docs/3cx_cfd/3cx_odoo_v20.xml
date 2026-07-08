@@ -1,0 +1,217 @@
+<?xml version="1.0"?>
+<Crm xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+     Country="[country]"
+     Name="3cxodoo"
+     Version="4"
+     SupportsEmojis="true"
+     SupportsTranscription="true">
+
+  <Number Prefix="AsIs" MaxLength="[MaxLength]" />
+  <Connection MaxConcurrentRequests="4" />
+
+  <Parameters>
+
+    <!-- SHARED TEMPLATE for two Odoo modules:
+         - apikey + hostodoo  -> module 3cxcrm (contact lookup/caller display).
+           Without 3cxcrm the contact search simply returns no matches.
+         - scrapikey + "Enable Call Journaling" -> module smart_callback_routing
+           (outbound report for sticky callback routing). Empty/off = sends nothing.
+         The unused part may be left empty. -->
+
+    <!-- API key of the 3cxcrm module (Odoo: Settings -> 3CX API Token). -->
+    <Parameter Name="apikey"
+               Parent="General Configuration"
+               Type="String"
+               Editor="String"
+               Title="ApiKey"
+               Default="IMVmT1n9hQV49Ace8O89" />
+
+    <Parameter Name="hostodoo"
+               Parent="General Configuration"
+               Type="String"
+               Editor="String"
+               Title="Host odoo"
+               Default="http://127.0.0.1:8069"
+               ListValues="http://127.0.0.1:8069" />
+
+    <Parameter Name="country"
+               Parent="General Configuration"
+               Type="String"
+               Editor="String"
+               Title="Country"
+               Default="IT"
+               ListValues="IT;US;" />
+
+    <!-- API key of the smart_callback_routing module (Odoo: Settings ->
+         Smart Callback Routing). Leave empty if callback routing is not used. -->
+    <Parameter Name="scrapikey"
+               Parent="General Configuration"
+               Type="String"
+               Editor="String"
+               Title="Smart Callback API Key"
+               Default="" />
+
+    <!-- ATTENTION: although this checkbox is called "Enable Call Journaling"
+         in 3CX, it does NOT write any note into Odoo here. It is the on/off
+         switch for the ReportCall scenario below, which reports OUTGOING calls
+         to smart_callback_routing (sticky mapping number->extension).
+         3CX only fires ReportCall if this parameter is declared AND checked,
+         which is why it must be present here. Real journaling (transcript/
+         summary on the contact) deliberately does not exist in this template.
+         The text fields below (Subject/*CallText) are mandatory cosmetics only:
+         3CX shows the checkbox only if at least one child field exists. The
+         outbound endpoint does NOT use them (only number/extension/calltype). -->
+    <Parameter Name="ReportCallEnabled"
+               Parent=""
+               Type="Boolean"
+               Editor="String"
+               Title="Enable Call Journaling"
+               Default="False" />
+
+    <Parameter Name="Subject"
+               Parent="ReportCallEnabled"
+               Type="String"
+               Editor="String"
+               Title="Subject"
+               Default="3CX Phone Call" />
+
+    <Parameter Name="InboundCallText"
+               Parent="ReportCallEnabled"
+               Type="String"
+               Editor="String"
+               Title="Inbound Call"
+               Default="[DateTime]: Incoming call from [Number] to [Agent] ([Duration])" />
+
+    <Parameter Name="MissedCallText"
+               Parent="ReportCallEnabled"
+               Type="String"
+               Editor="String"
+               Title="Missed Call"
+               Default="[DateTime]: Missed call from [Number] to [Agent]" />
+
+    <Parameter Name="OutboundCallText"
+               Parent="ReportCallEnabled"
+               Type="String"
+               Editor="String"
+               Title="Outbound Call"
+               Default="[DateTime]: Outgoing call from [Agent] to [Number] ([Duration])" />
+
+    <Parameter Name="NotAnsweredOutboundCallText"
+               Parent="ReportCallEnabled"
+               Type="String"
+               Editor="String"
+               Title="Unanswered Outbound Call"
+               Default="[DateTime]: Unanswered outgoing call from [Agent] to [Number]" />
+
+  </Parameters>
+
+  <Authentication Type="No" />
+
+  <Scenarios>
+
+    <!-- Contact search: provides 3CX with name/company/URL for the incoming number. -->
+    <Scenario Id="" Type="REST">
+
+      <Request SkipIf=""
+               Url="[hostodoo]/api/3cx/crm"
+               MessagePasses="0"
+               Message=""
+               RequestContentType="application/json"
+               RequestEncoding="Json"
+               RequestType="Post"
+               ResponseType="Json">
+
+        <Headers>
+          <Value Key="apikey" Passes="1" Type="String">[apikey]</Value>
+        </Headers>
+
+        <PostValues>
+          <Value Key="number" Passes="1" Type="String">[Number]</Value>
+        </PostValues>
+
+      </Request>
+
+      <Rules>
+        <Rule Type="Any">result.partner_id</Rule>
+      </Rules>
+
+      <Variables>
+
+        <Variable Name="ContactID" Path="result.partner_id"><Filter /></Variable>
+        <Variable Name="FirstName" Path="result.first"><Filter /></Variable>
+        <Variable Name="Email" Path="result.email"><Filter /></Variable>
+        <Variable Name="PhoneMobile" Path="result.mobile"><Filter /></Variable>
+        <Variable Name="ContactUrl" Path="result.url"><Filter /></Variable>
+
+        <Variable Name="firstname">result.firstname<Filter /></Variable>
+        <Variable Name="lastname">result.lastname<Filter /></Variable>
+        <Variable Name="phone">result.phone<Filter /></Variable>
+        <Variable Name="web_url">result.web_url<Filter /></Variable>
+        <Variable Name="company_type">result.company_type<Filter /></Variable>
+        <Variable Name="name">result.name<Filter /></Variable>
+
+      </Variables>
+
+      <Outputs AllowEmpty="false">
+
+        <Output Type="ContactID" Value="[ContactID]" />
+        <Output Type="FirstName" Value="[FirstName]" />
+        <Output Type="Email" Value="[Email]" />
+        <Output Type="PhoneMobile" Value="[PhoneMobile]" />
+        <Output Type="ContactUrl" Value="[ContactUrl]" />
+
+        <Output Type="EntityId" Value="[ContactID]" />
+        <Output Type="EntityType" Value="Contacts" />
+
+        <Output Type="FirstName" Value="[firstname]" />
+        <Output Type="LastName" Value="[lastname]" />
+        <Output Type="PhoneHome" Value="[phone]" />
+        <Output Type="ContactUrl" Value="[web_url]" />
+        <Output Type="CompanyName" Value="[name]" />
+
+      </Outputs>
+
+    </Scenario>
+
+    <!-- ==========================================================
+         "Call Journaling" (ReportCall)
+         Called by 3CX after the call ends. Reports only OUTGOING calls
+         (Outbound/Notanswered) to smart_callback_routing, so that the sticky
+         mapping number->extension is created there. Incoming/missed calls are
+         skipped. Without a configured scrapikey (or without the "Enable Call
+         Journaling" checkbox) nothing happens.
+         ========================================================== -->
+
+    <Scenario Id="ReportCall" Type="REST">
+
+      <!-- SkipIf: compare word literals (Inbound/Missed) WITHOUT quotes, as in
+           the official 3CX templates. With &quot;...&quot; the comparison never
+           matches -> inbound calls would wrongly be sent along (Odoo ignores
+           them, but it is unnecessary traffic + log noise). -->
+      <Request
+          SkipIf="[ReportCallEnabled]!=True||[scrapikey]==&quot;&quot;||[CallType]==Inbound||[CallType]==Missed"
+          Url="[hostodoo]/api/3cx/outbound"
+          RequestContentType="application/json"
+          RequestEncoding="Json"
+          RequestType="Post"
+          ResponseType="Json">
+
+        <Headers>
+          <Value Key="X-API-Key" Passes="1" Type="String">[scrapikey]</Value>
+        </Headers>
+
+        <PostValues>
+          <Value Key="number" Passes="1" Type="String">[Number]</Value>
+          <Value Key="extension" Passes="1" Type="String">[Agent]</Value>
+          <Value Key="calltype" Passes="1" Type="String">[CallType]</Value>
+          <Value Key="apikey" Passes="1" Type="String">[scrapikey]</Value>
+        </PostValues>
+
+      </Request>
+
+    </Scenario>
+
+  </Scenarios>
+
+</Crm>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_scr_routing_log_list" model="ir.ui.view">
+        <field name="name">scr.routing.log.list</field>
+        <field name="model">scr.routing.log</field>
+        <field name="arch" type="xml">
+            <list string="Routing Log" create="false"
+                  decoration-success="decision == 'sticky_first'"
+                  decoration-info="decision in ('created', 'updated')"
+                  decoration-muted="decision in ('default', 'ignored')"
+                  decoration-danger="decision == 'error'">
+                <field name="create_date" string="Timestamp"/>
+                <field name="event"/>
+                <field name="phone_normalized"/>
+                <field name="did"/>
+                <field name="extension"/>
+                <field name="decision" widget="badge"/>
+                <field name="fallback_reason" optional="show"/>
+                <field name="latency_ms" optional="show"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_scr_routing_log_form" model="ir.ui.view">
+        <field name="name">scr.routing.log.form</field>
+        <field name="model">scr.routing.log</field>
+        <field name="arch" type="xml">
+            <form string="Routing Log" create="false" edit="false">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="create_date" string="Timestamp"/>
+                            <field name="event"/>
+                            <field name="decision"/>
+                            <field name="fallback_reason"/>
+                        </group>
+                        <group>
+                            <field name="phone_normalized"/>
+                            <field name="raw_callerid"/>
+                            <field name="did"/>
+                            <field name="extension"/>
+                            <field name="latency_ms"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                    </group>
+                    <group string="Details" invisible="not detail">
+                        <field name="detail" nolabel="1"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_scr_routing_log_search" model="ir.ui.view">
+        <field name="name">scr.routing.log.search</field>
+        <field name="model">scr.routing.log</field>
+        <field name="arch" type="xml">
+            <search string="Routing Log">
+                <field name="phone_normalized"/>
+                <field name="extension"/>
+                <field name="did"/>
+                <filter name="filter_inbound" string="Inbound" domain="[('event', '=', 'inbound')]"/>
+                <filter name="filter_outbound" string="Outbound" domain="[('event', '=', 'outbound')]"/>
+                <filter name="filter_sticky" string="Sticky hits" domain="[('decision', '=', 'sticky_first')]"/>
+                <filter name="filter_errors" string="Errors" domain="[('decision', '=', 'error')]"/>
+                <group name="group_by">
+                    <filter name="group_event" string="Event" context="{'group_by': 'event'}"/>
+                    <filter name="group_decision" string="Decision" context="{'group_by': 'decision'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_scr_routing_log" model="ir.actions.act_window">
+        <field name="name">Routing Log</field>
+        <field name="res_model">scr.routing.log</field>
+        <field name="view_mode">list,form</field>
+        <field name="search_view_id" ref="view_scr_routing_log_search"/>
+    </record>
+
+</odoo>

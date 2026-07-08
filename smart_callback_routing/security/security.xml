@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Module category (groups the privilege in the user settings form) -->
+    <record id="module_category_smart_callback_routing" model="ir.module.category">
+        <field name="name">Smart Callback Routing</field>
+        <field name="sequence">52</field>
+    </record>
+
+    <!-- Privilege (Odoo 19 intermediate layer between category and groups) -->
+    <record id="privilege_scr" model="res.groups.privilege">
+        <field name="name">Smart Callback Routing</field>
+        <field name="sequence">52</field>
+        <field name="category_id" ref="module_category_smart_callback_routing"/>
+        <field name="placeholder">No access</field>
+    </record>
+
+    <!-- User group: read-only monitoring of active routes & logs -->
+    <record id="group_scr_user" model="res.groups">
+        <field name="name">User</field>
+        <field name="sequence">10</field>
+        <field name="privilege_id" ref="privilege_scr"/>
+        <field name="implied_ids" eval="[(6, 0, [ref('base.group_user')])]"/>
+    </record>
+
+    <!-- Manager group: full configuration (extensions, settings) -->
+    <record id="group_scr_manager" model="res.groups">
+        <field name="name">Manager</field>
+        <field name="sequence">20</field>
+        <field name="privilege_id" ref="privilege_scr"/>
+        <field name="implied_ids" eval="[(4, ref('smart_callback_routing.group_scr_user'))]"/>
+        <field name="user_ids" eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"/>
+    </record>
+
+    <!-- Multi-company record rules: users only see their companies' data -->
+    <record id="rule_scr_callback_route_company" model="ir.rule">
+        <field name="name">Callback Route: multi-company</field>
+        <field name="model_id" ref="model_scr_callback_route"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        <field name="global" eval="True"/>
+    </record>
+
+    <record id="rule_scr_extension_company" model="ir.rule">
+        <field name="name">Extension: multi-company</field>
+        <field name="model_id" ref="model_scr_extension"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        <field name="global" eval="True"/>
+    </record>
+
+    <record id="rule_scr_routing_log_company" model="ir.rule">
+        <field name="name">Routing Log: multi-company</field>
+        <field name="model_id" ref="model_scr_routing_log"/>
+        <field name="domain_force">['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+        <field name="global" eval="True"/>
+    </record>
+
+</odoo>

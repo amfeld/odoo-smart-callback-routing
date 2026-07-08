@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_scr_extension_list" model="ir.ui.view">
+        <field name="name">scr.extension.list</field>
+        <field name="model">scr.extension</field>
+        <field name="arch" type="xml">
+            <list string="Extensions" editable="bottom">
+                <field name="name"/>
+                <field name="employee_id"/>
+                <field name="user_id" optional="hide"/>
+                <field name="presence_state" widget="badge"
+                       decoration-success="presence_state == 'available'"
+                       decoration-warning="presence_state in ('busy', 'dnd')"
+                       decoration-muted="presence_state in ('offline', 'unknown')"/>
+                <field name="registered" widget="boolean_toggle"/>
+                <field name="presence_updated_at" optional="show"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </list>
+        </field>
+    </record>
+
+    <record id="view_scr_extension_form" model="ir.ui.view">
+        <field name="name">scr.extension.form</field>
+        <field name="model">scr.extension</field>
+        <field name="arch" type="xml">
+            <form string="Extension">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="employee_id"/>
+                            <field name="user_id"/>
+                            <field name="company_id" groups="base.group_multi_company"/>
+                        </group>
+                        <group>
+                            <field name="presence_state"/>
+                            <field name="registered"/>
+                            <field name="presence_updated_at"/>
+                            <field name="active"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_scr_extension" model="ir.actions.act_window">
+        <field name="name">Extensions</field>
+        <field name="res_model">scr.extension</field>
+        <field name="view_mode">list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No extensions recorded yet.</p>
+            <p>Extensions are created automatically as soon as 3CX reports
+               presence or outbound events. Here they can be mapped to employees.</p>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,30 @@
+### Outbound report to Odoo (on the "ringing" state change)
+# Send from the 3CX Call Control API / webhook as soon as the outgoing call rings.
+# event must be one of: ringing | answered | busy | noanswer.
+# Do NOT send "failed"/"instant" -> deliberately creates no sticky mapping.
+
+POST https://CHANGE-ME.odoo.example.com/api/3cx/outbound
+Content-Type: application/json
+X-API-Key: CHANGE-ME
+# X-Signature: <hex(hmac_sha256(body, SigningSecret))>   # only if a secret is set
+
+{
+  "event": "ringing",
+  "extension": "105",
+  "number": "+491701234567",
+  "call_id": "abc-123"
+}
+
+### Inbound lookup (reference – in the CFD via Make HTTP Request)
+POST https://CHANGE-ME.odoo.example.com/api/3cx/callback-routing
+Content-Type: application/json
+X-API-Key: CHANGE-ME
+
+{ "callerid": "+491701234567", "did": "089123456", "queue": "PROJECTS" }
+
+### Presence (optional)
+POST https://CHANGE-ME.odoo.example.com/api/3cx/presence
+Content-Type: application/json
+X-API-Key: CHANGE-ME
+
+{ "extension": "105", "state": "available", "registered": true }

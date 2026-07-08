@@ -1,0 +1,677 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* smart_callback_routing
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: smart_callback_routing\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-08 05:08+0000\n"
+"PO-Revision-Date: 2026-07-08 05:08+0000\n"
+"Last-Translator: \n"
+"Language-Team: German\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,help:smart_callback_routing.field_scr_callback_route__last_call_id
+msgid "3CX call ID of the outbound attempt that created this mapping."
+msgstr "3CX Call-ID des Outbound-Versuchs, der diese Zuordnung erzeugt hat."
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,help:smart_callback_routing.field_scr_extension__name
+msgid "3CX extension number, e.g. 105."
+msgstr "3CX-Nebenstellennummer, z. B. 105."
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,help:smart_callback_routing.field_scr_callback_route__extension
+msgid "3CX extension of the employee who last dialed outbound."
+msgstr "3CX-Nebenstelle des Mitarbeiters, der zuletzt outbound gewählt hat."
+
+#. module: smart_callback_routing
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.res_config_settings_view_form_scr
+msgid ""
+"3CX sends this key in the 'X-API-Key' header. Only matching requests are "
+"answered."
+msgstr ""
+"3CX sendet diesen Schlüssel im Header 'X-API-Key'. Nur passende Anfragen "
+"werden beantwortet."
+
+#. module: smart_callback_routing
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.res_config_settings_view_form_scr
+msgid "API Security"
+msgstr "API-Sicherheit"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_res_config_settings__scr_api_key
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.res_config_settings_view_form_scr
+msgid "API key"
+msgstr "API-Schlüssel"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_callback_route__active
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_extension__active
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.view_scr_callback_route_search
+msgid "Active"
+msgstr "Aktiv"
+
+#. module: smart_callback_routing
+#: model:ir.actions.act_window,name:smart_callback_routing.action_scr_callback_route
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.view_scr_callback_route_list
+msgid "Active Callback Mappings"
+msgstr "Aktive Callback-Zuordnungen"
+
+#. module: smart_callback_routing
+#: model:ir.ui.menu,name:smart_callback_routing.menu_scr_routes
+msgid "Active Mappings"
+msgstr "Aktive Zuordnungen"
+
+#. module: smart_callback_routing
+#: model:ir.model.constraint,message:smart_callback_routing.constraint_scr_extension_unique_name_company
+msgid "An extension may exist only once per company."
+msgstr "Eine Nebenstelle darf je Unternehmen nur einmal existieren."
+
+#. module: smart_callback_routing
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.res_config_settings_view_form_scr
+msgid "Availability (Skip Rules)"
+msgstr "Verfügbarkeit (Skip-Regeln)"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields.selection,name:smart_callback_routing.selection__scr_extension__presence_state__available
+msgid "Available"
+msgstr "Verfügbar"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields.selection,name:smart_callback_routing.selection__scr_extension__presence_state__busy
+msgid "Busy"
+msgstr "Besetzt"
+
+#. module: smart_callback_routing
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.view_scr_callback_route_form
+msgid "Callback Mapping"
+msgstr "Callback-Zuordnung"
+
+#. module: smart_callback_routing
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.view_scr_callback_route_search
+msgid "Callback Mappings"
+msgstr "Callback-Zuordnungen"
+
+#. module: smart_callback_routing
+#: model:ir.ui.menu,name:smart_callback_routing.menu_scr_root
+msgid "Callback Routing"
+msgstr "Callback Routing"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_callback_route__company_id
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_extension__company_id
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_routing_log__company_id
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.view_scr_callback_route_search
+msgid "Company"
+msgstr "Unternehmen"
+
+#. module: smart_callback_routing
+#: model:ir.model,name:smart_callback_routing.model_res_config_settings
+msgid "Config Settings"
+msgstr "Konfigurationseinstellungen"
+
+#. module: smart_callback_routing
+#: model:ir.ui.menu,name:smart_callback_routing.menu_scr_config
+msgid "Configuration"
+msgstr "Konfiguration"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,help:smart_callback_routing.field_res_config_settings__scr_default_country_prefix
+msgid ""
+"Country prefix without \"+\", applied to national numbers (leading 0). "
+"Germany = 49."
+msgstr ""
+"Ländervorwahl ohne \"+\", die auf nationale Nummern angewandt wird (DE = 49)."
+
+#. module: smart_callback_routing
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.res_config_settings_view_form_scr
+msgid ""
+"Country prefix without '+', applied to national numbers (leading 0). Germany"
+" = 49."
+msgstr ""
+"Ländervorwahl ohne '+', die auf nationale Nummern (führende 0) angewandt "
+"wird. DE = 49."
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_callback_route__created_at
+msgid "Created"
+msgstr "Erstellt"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_callback_route__create_uid
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_extension__create_uid
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_routing_log__create_uid
+msgid "Created by"
+msgstr "Erstellt von"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_callback_route__create_date
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_extension__create_date
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_routing_log__create_date
+msgid "Created on"
+msgstr "Erstellt am"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_routing_log__did
+msgid "DID/Queue"
+msgstr "DID/Queue"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_routing_log__decision
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.view_scr_routing_log_search
+msgid "Decision"
+msgstr "Entscheidung"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_res_config_settings__scr_default_country_prefix
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.res_config_settings_view_form_scr
+msgid "Default country prefix"
+msgstr "Default-Ländervorwahl"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields.selection,name:smart_callback_routing.selection__scr_routing_log__decision__default
+msgid "Default routing"
+msgstr "Standard-Routing"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_routing_log__detail
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.view_scr_routing_log_form
+msgid "Details"
+msgstr "Details"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_callback_route__display_name
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_extension__display_name
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_routing_log__display_name
+msgid "Display Name"
+msgstr "Anzeigename"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields.selection,name:smart_callback_routing.selection__scr_extension__presence_state__dnd
+msgid "Do Not Disturb (DND)"
+msgstr "Nicht stören (DND)"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_extension__employee_id
+msgid "Employee"
+msgstr "Mitarbeiter"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields.selection,name:smart_callback_routing.selection__scr_routing_log__decision__error
+#: model:ir.model.fields.selection,name:smart_callback_routing.selection__scr_routing_log__event__error
+msgid "Error"
+msgstr "Fehler"
+
+#. module: smart_callback_routing
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.view_scr_routing_log_search
+msgid "Errors"
+msgstr "Fehler"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_routing_log__event
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.view_scr_routing_log_search
+msgid "Event"
+msgstr "Ereignis"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_callback_route__expires_at
+msgid "Expires"
+msgstr "Läuft ab"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_callback_route__extension
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_extension__name
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_routing_log__extension
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.view_scr_callback_route_search
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.view_scr_extension_form
+msgid "Extension"
+msgstr "Extension"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields.selection,name:smart_callback_routing.selection__scr_routing_log__fallback_reason__unavailable
+msgid "Extension unavailable"
+msgstr "Extension nicht verfügbar"
+
+#. module: smart_callback_routing
+#: model:ir.actions.act_window,name:smart_callback_routing.action_scr_extension
+#: model:ir.ui.menu,name:smart_callback_routing.menu_scr_extensions
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.view_scr_extension_list
+msgid "Extensions"
+msgstr "Nebenstellen"
+
+#. module: smart_callback_routing
+#: model_terms:ir.actions.act_window,help:smart_callback_routing.action_scr_extension
+msgid ""
+"Extensions are created automatically as soon as 3CX reports\n"
+"               presence or outbound events. Here they can be mapped to employees."
+msgstr ""
+"Nebenstellen werden automatisch angelegt, sobald 3CX Presence- oder\n"
+"               Outbound-Events meldet. Hier können sie Mitarbeitern zugeordnet werden."
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_routing_log__fallback_reason
+msgid "Fallback Reason"
+msgstr "Fallback-Grund"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_res_config_settings__scr_first_ring_timeout
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.res_config_settings_view_form_scr
+msgid "First-ring timeout (seconds)"
+msgstr "First-Ring-Timeout (Sekunden)"
+
+#. module: smart_callback_routing
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.res_config_settings_view_form_scr
+msgid "Generate new key"
+msgstr "Neuen Schlüssel erzeugen"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_res_config_settings__scr_signing_secret
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.res_config_settings_view_form_scr
+msgid "HMAC signing secret (optional)"
+msgstr "HMAC-Signing-Secret (optional)"
+
+#. module: smart_callback_routing
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.res_config_settings_view_form_scr
+msgid ""
+"How long a phone-number→extension mapping stays valid (default 120 = 2 h)."
+msgstr ""
+"Wie lange eine Telefonnummer→Extension-Zuordnung gültig bleibt (Default 120 ="
+" 2 h)."
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,help:smart_callback_routing.field_res_config_settings__scr_first_ring_timeout
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.res_config_settings_view_form_scr
+msgid ""
+"How long the preferred extension rings before the queue fallback applies."
+msgstr ""
+"Wie lange die bevorzugte Extension klingelt, bevor der Queue-Fallback greift."
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_res_config_settings__id
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_callback_route__id
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_extension__id
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_routing_log__id
+msgid "ID"
+msgstr "ID"
+
+#. module: smart_callback_routing
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.res_config_settings_view_form_scr
+msgid ""
+"If set, requests must additionally carry an HMAC-SHA256 signature in the "
+"'X-Signature' header."
+msgstr ""
+"Wenn gesetzt, müssen Anfragen zusätzlich eine HMAC-SHA256-Signatur im Header "
+"'X-Signature' tragen."
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,help:smart_callback_routing.field_res_config_settings__scr_signing_secret
+msgid ""
+"If set, requests must additionally carry an HMAC-SHA256 signature of the raw"
+" body in the \"X-Signature\" header (SEC-003)."
+msgstr ""
+"Wenn gesetzt, müssen Anfragen zusätzlich im Header \"X-Signature\" eine "
+"HMAC-SHA256-Signatur des Rohbodys tragen (SEC-003)."
+
+#. module: smart_callback_routing
+#: model:ir.model.fields.selection,name:smart_callback_routing.selection__scr_routing_log__decision__ignored
+msgid "Ignored (anonymous/invalid)"
+msgstr "Ignoriert (anonym/ungültig)"
+
+#. module: smart_callback_routing
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.view_scr_routing_log_search
+msgid "Inbound"
+msgstr "Inbound"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields.selection,name:smart_callback_routing.selection__scr_routing_log__event__inbound
+msgid "Inbound lookup"
+msgstr "Inbound-Lookup"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,help:smart_callback_routing.field_res_config_settings__scr_sticky_disabled
+msgid ""
+"Kill switch: while active, the routing API always answers with \"default\" —"
+" 3CX routes normally everywhere, without touching the phone system. Outbound"
+" mappings are still recorded."
+msgstr ""
+"Not-Aus: Solange aktiv, antwortet die Routing-API immer mit \"default\" — 3CX"
+" routet überall normal, ohne Eingriff in die Telefonanlage. "
+"Outbound-Zuordnungen werden weiterhin erfasst."
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_callback_route__last_call_id
+msgid "Last Call ID"
+msgstr "Letzte Call-ID"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_callback_route__write_uid
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_extension__write_uid
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_routing_log__write_uid
+msgid "Last Updated by"
+msgstr "Zuletzt aktualisiert von"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_callback_route__write_date
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_extension__write_date
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_routing_log__write_date
+msgid "Last Updated on"
+msgstr "Zuletzt aktualisiert am"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_routing_log__latency_ms
+msgid "Latency (ms)"
+msgstr "Latenz (ms)"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,help:smart_callback_routing.field_scr_callback_route__extension_id
+msgid ""
+"Linked extension record (for presence checks & transparency). Not stored — "
+"resolved on demand, because extensions may be created only after the "
+"mapping."
+msgstr ""
+"Verknüpfter Nebenstellen-Datensatz (für Presence-Prüfung & Transparenz). "
+"Nicht gespeichert — wird bei Bedarf frisch aufgelöst, da Nebenstellen auch "
+"nach der Zuordnung erst angelegt werden können."
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_res_config_settings__scr_logging_enabled
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.res_config_settings_view_form_scr
+msgid "Log routing decisions"
+msgstr "Routing-Entscheidungen protokollieren"
+
+#. module: smart_callback_routing
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.res_config_settings_view_form_scr
+msgid "Logging"
+msgstr "Protokollierung"
+
+#. module: smart_callback_routing
+#: model:res.groups,name:smart_callback_routing.group_scr_manager
+msgid "Manager"
+msgstr "Manager"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_callback_route__extension_id
+msgid "Mapped Extension"
+msgstr "Zugeordnete Nebenstelle"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields.selection,name:smart_callback_routing.selection__scr_routing_log__decision__created
+msgid "Mapping created/updated"
+msgstr "Zuordnung angelegt/aktualisiert"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields.selection,name:smart_callback_routing.selection__scr_routing_log__fallback_reason__expired
+msgid "Mapping expired"
+msgstr "Zuordnung abgelaufen"
+
+#. module: smart_callback_routing
+#: model_terms:ir.actions.act_window,help:smart_callback_routing.action_scr_callback_route
+msgid ""
+"Mappings are created automatically as soon as 3CX reports\n"
+"               outbound events to the routing API."
+msgstr ""
+"Zuordnungen entstehen automatisch, sobald 3CX Outbound-Events an die\n"
+"               Routing-API meldet."
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,help:smart_callback_routing.field_scr_callback_route__expires_at
+msgid "Moment at which the mapping expires (end of TTL)."
+msgstr "Zeitpunkt, ab dem die Zuordnung verfällt (TTL-Ende)."
+
+#. module: smart_callback_routing
+#: model_terms:ir.actions.act_window,help:smart_callback_routing.action_scr_callback_route
+msgid "No callback mappings yet."
+msgstr "Noch keine Callback-Zuordnungen."
+
+#. module: smart_callback_routing
+#: model_terms:ir.actions.act_window,help:smart_callback_routing.action_scr_extension
+msgid "No extensions recorded yet."
+msgstr "Noch keine Nebenstellen erfasst."
+
+#. module: smart_callback_routing
+#: model:ir.model.fields.selection,name:smart_callback_routing.selection__scr_routing_log__fallback_reason__no_match
+msgid "No valid mapping"
+msgstr "Keine gültige Zuordnung"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,help:smart_callback_routing.field_scr_callback_route__phone_normalized
+msgid "Normalized external phone number (e.g. +491701234567)."
+msgstr "Normalisierte externe Telefonnummer (z. B. +491701234567)."
+
+#. module: smart_callback_routing
+#: model:ir.model.fields.selection,name:smart_callback_routing.selection__scr_extension__presence_state__offline
+msgid "Offline"
+msgstr "Offline"
+
+#. module: smart_callback_routing
+#: model:ir.model.constraint,message:smart_callback_routing.constraint_scr_callback_route_unique_phone_company
+msgid "Only one mapping may exist per phone number and company."
+msgstr "Pro Unternehmen darf je Telefonnummer nur eine Zuordnung existieren."
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,help:smart_callback_routing.field_scr_extension__user_id
+msgid "Optional: mapped Odoo user (informational only)."
+msgstr "Optional: zugeordneter Odoo-Benutzer (nur informativ)."
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,help:smart_callback_routing.field_scr_extension__employee_id
+msgid "Optional: mapped employee (informational only)."
+msgstr "Optional: zugeordneter Mitarbeiter (nur informativ)."
+
+#. module: smart_callback_routing
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.view_scr_routing_log_search
+msgid "Outbound"
+msgstr "Outbound"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields.selection,name:smart_callback_routing.selection__scr_routing_log__event__outbound
+msgid "Outbound recorded"
+msgstr "Outbound erfasst"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_res_config_settings__scr_sticky_disabled
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.res_config_settings_view_form_scr
+msgid "Pause sticky routing (kill switch)"
+msgstr "Sticky-Routing pausieren (Not-Aus)"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_callback_route__phone_normalized
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_routing_log__phone_normalized
+msgid "Phone Number"
+msgstr "Telefonnummer"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_extension__presence_state
+msgid "Presence"
+msgstr "Presence"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_extension__presence_updated_at
+msgid "Presence Updated"
+msgstr "Presence aktualisiert"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields.selection,name:smart_callback_routing.selection__scr_routing_log__event__presence
+msgid "Presence update"
+msgstr "Presence-Update"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields.selection,name:smart_callback_routing.selection__scr_routing_log__decision__updated
+msgid "Presence updated"
+msgstr "Presence aktualisiert"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_routing_log__raw_callerid
+msgid "Raw Caller ID"
+msgstr "Roh-CallerID"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_extension__registered
+msgid "Registered"
+msgstr "Registriert"
+
+#. module: smart_callback_routing
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.res_config_settings_view_form_scr
+msgid "Routing Behavior"
+msgstr "Routing-Verhalten"
+
+#. module: smart_callback_routing
+#: model:ir.actions.act_window,name:smart_callback_routing.action_scr_routing_log
+#: model:ir.ui.menu,name:smart_callback_routing.menu_scr_log
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.view_scr_routing_log_form
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.view_scr_routing_log_list
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.view_scr_routing_log_search
+msgid "Routing Log"
+msgstr "Routing-Protokoll"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,help:smart_callback_routing.field_res_config_settings__scr_api_key
+msgid ""
+"Sent by 3CX in the \"X-API-Key\" header. Only requests with the correct key "
+"are answered (SEC-001/SEC-002)."
+msgstr ""
+"Wird von 3CX im Header \"X-API-Key\" mitgesendet. Nur Anfragen mit korrektem "
+"Schlüssel werden beantwortet (SEC-001/SEC-002)."
+
+#. module: smart_callback_routing
+#: model:ir.ui.menu,name:smart_callback_routing.menu_scr_settings
+msgid "Settings"
+msgstr "Einstellungen"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_res_config_settings__scr_skip_dnd
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.res_config_settings_view_form_scr
+msgid "Skip DND extension"
+msgstr "DND-Extension überspringen"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_res_config_settings__scr_skip_busy
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.res_config_settings_view_form_scr
+msgid "Skip busy extension"
+msgstr "Besetzte Extension überspringen"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_res_config_settings__scr_skip_offline
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.res_config_settings_view_form_scr
+msgid "Skip offline/unregistered extension"
+msgstr "Offline/nicht registrierte Extension überspringen"
+
+#. module: smart_callback_routing
+#: model:ir.module.category,name:smart_callback_routing.module_category_smart_callback_routing
+#: model:res.groups.privilege,name:smart_callback_routing.privilege_scr
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.res_config_settings_view_form_scr
+msgid "Smart Callback Routing"
+msgstr "Smart Callback Routing"
+
+#. module: smart_callback_routing
+#: model:ir.model,name:smart_callback_routing.model_scr_extension
+msgid "Smart Callback Routing – 3CX Extension"
+msgstr "Smart Callback Routing – 3CX-Nebenstelle"
+
+#. module: smart_callback_routing
+#: model:ir.model,name:smart_callback_routing.model_scr_routing_log
+msgid "Smart Callback Routing – Decision Log"
+msgstr "Smart Callback Routing – Entscheidungs-Protokoll"
+
+#. module: smart_callback_routing
+#: model:ir.model,name:smart_callback_routing.model_scr_callback_route
+msgid "Smart Callback Routing – Sticky Mapping"
+msgstr "Smart Callback Routing – Sticky-Zuordnung"
+
+#. module: smart_callback_routing
+#: model:ir.actions.server,name:smart_callback_routing.ir_cron_scr_cleanup_expired_ir_actions_server
+msgid "Smart Callback Routing: Clean up expired mappings"
+msgstr "Smart Callback Routing: Abgelaufene Zuordnungen bereinigen"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_res_config_settings__scr_ttl_minutes
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.res_config_settings_view_form_scr
+msgid "Sticky TTL (minutes)"
+msgstr "Sticky-TTL (Minuten)"
+
+#. module: smart_callback_routing
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.view_scr_routing_log_search
+msgid "Sticky hits"
+msgstr "Sticky-Treffer"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields.selection,name:smart_callback_routing.selection__scr_routing_log__fallback_reason__sticky_disabled
+msgid "Sticky paused (kill switch)"
+msgstr "Sticky pausiert (Not-Aus)"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields.selection,name:smart_callback_routing.selection__scr_routing_log__decision__sticky_first
+msgid "Sticky – preferred ring"
+msgstr "Sticky – bevorzugtes Klingeln"
+
+#. module: smart_callback_routing
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.view_scr_routing_log_form
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.view_scr_routing_log_list
+msgid "Timestamp"
+msgstr "Zeitpunkt"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,help:smart_callback_routing.field_scr_callback_route__is_valid
+msgid "True as long as the mapping is active and not expired."
+msgstr "True, solange die Zuordnung aktiv und nicht abgelaufen ist."
+
+#. module: smart_callback_routing
+#: model:ir.model.fields.selection,name:smart_callback_routing.selection__scr_extension__presence_state__unknown
+msgid "Unknown"
+msgstr "Unbekannt"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_extension__user_id
+#: model:res.groups,name:smart_callback_routing.group_scr_user
+msgid "User"
+msgstr "Benutzer"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_callback_route__is_valid
+msgid "Valid"
+msgstr "Gültig"
+
+#. module: smart_callback_routing
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.view_scr_callback_route_search
+msgid "Valid (not expired)"
+msgstr "Gültig (nicht abgelaufen)"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,help:smart_callback_routing.field_res_config_settings__scr_ttl_minutes
+msgid ""
+"Validity period of a phone-number→extension mapping. Default 120 (2 h)."
+msgstr ""
+"Gültigkeitsdauer einer Telefonnummer→Extension-Zuordnung. Default 120 (2 h)."
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,help:smart_callback_routing.field_scr_extension__registered
+msgid "Whether the extension's device is registered with 3CX."
+msgstr "Ob das Endgerät der Nebenstelle bei 3CX registriert ist."
+
+#. module: smart_callback_routing
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.res_config_settings_view_form_scr
+msgid ""
+"While active, the routing API always answers with 'default' — 3CX routes "
+"normally everywhere, without any change to the phone system. Outbound "
+"mappings are still recorded."
+msgstr ""
+"Solange aktiv, antwortet die Routing-API immer mit 'default' — 3CX routet "
+"überall normal, ohne jede Änderung an der Telefonanlage. "
+"Outbound-Zuordnungen werden weiterhin erfasst."
+
+#. module: smart_callback_routing
+#: model_terms:ir.ui.view,arch_db:smart_callback_routing.res_config_settings_view_form_scr
+msgid ""
+"Writes every routing decision to the log. Can be disabled for maximum "
+"performance."
+msgstr ""
+"Schreibt jede Routing-Entscheidung ins Protokoll. Für maximale Performance "
+"deaktivierbar."

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form_scr" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.scr</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app data-string="Smart Callback Routing"
+                     string="Smart Callback Routing"
+                     name="smart_callback_routing"
+                     id="smart_callback_routing"
+                     groups="smart_callback_routing.group_scr_manager">
+                    <block title="Routing Behavior" name="scr_routing_block">
+                        <setting string="Pause sticky routing (kill switch)"
+                                 help="While active, the routing API always answers with 'default' — 3CX routes normally everywhere, without any change to the phone system. Outbound mappings are still recorded."
+                                 id="scr_sticky_disabled_setting">
+                            <field name="scr_sticky_disabled"/>
+                        </setting>
+                        <setting string="Sticky TTL (minutes)"
+                                 help="How long a phone-number→extension mapping stays valid (default 120 = 2 h)."
+                                 id="scr_ttl_minutes_setting">
+                            <field name="scr_ttl_minutes"/>
+                        </setting>
+                        <setting string="First-ring timeout (seconds)"
+                                 help="How long the preferred extension rings before the queue fallback applies."
+                                 id="scr_first_ring_timeout_setting">
+                            <field name="scr_first_ring_timeout"/>
+                        </setting>
+                        <setting string="Default country prefix"
+                                 help="Country prefix without '+', applied to national numbers (leading 0). Germany = 49."
+                                 id="scr_default_country_prefix_setting">
+                            <field name="scr_default_country_prefix"/>
+                        </setting>
+                    </block>
+                    <block title="Availability (Skip Rules)" name="scr_skip_block">
+                        <setting string="Skip busy extension"
+                                 id="scr_skip_busy_setting">
+                            <field name="scr_skip_busy"/>
+                        </setting>
+                        <setting string="Skip offline/unregistered extension"
+                                 id="scr_skip_offline_setting">
+                            <field name="scr_skip_offline"/>
+                        </setting>
+                        <setting string="Skip DND extension"
+                                 id="scr_skip_dnd_setting">
+                            <field name="scr_skip_dnd"/>
+                        </setting>
+                    </block>
+                    <block title="API Security" name="scr_security_block">
+                        <setting string="API key"
+                                 help="3CX sends this key in the 'X-API-Key' header. Only matching requests are answered."
+                                 id="scr_api_key_setting">
+                            <field name="scr_api_key" widget="CopyClipboardChar"/>
+                            <button name="action_scr_generate_api_key"
+                                    string="Generate new key"
+                                    type="object"
+                                    class="btn-secondary mt-2"
+                                    icon="fa-key"/>
+                        </setting>
+                        <setting string="HMAC signing secret (optional)"
+                                 help="If set, requests must additionally carry an HMAC-SHA256 signature in the 'X-Signature' header."
+                                 id="scr_signing_secret_setting">
+                            <field name="scr_signing_secret" password="True"/>
+                        </setting>
+                    </block>
+                    <block title="Logging" name="scr_logging_block">
+                        <setting string="Log routing decisions"
+                                 help="Writes every routing decision to the log. Can be disabled for maximum performance."
+                                 id="scr_logging_enabled_setting">
+                            <field name="scr_logging_enabled"/>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+</odoo>

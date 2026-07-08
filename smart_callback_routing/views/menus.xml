@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Root menu -->
+    <menuitem id="menu_scr_root"
+              name="Callback Routing"
+              web_icon="smart_callback_routing,static/description/icon.png"
+              sequence="95"
+              groups="smart_callback_routing.group_scr_user"/>
+
+    <!-- Monitoring -->
+    <menuitem id="menu_scr_routes"
+              name="Active Mappings"
+              parent="menu_scr_root"
+              action="action_scr_callback_route"
+              sequence="10"/>
+
+    <menuitem id="menu_scr_log"
+              name="Routing Log"
+              parent="menu_scr_root"
+              action="action_scr_routing_log"
+              sequence="20"/>
+
+    <!-- Configuration -->
+    <menuitem id="menu_scr_config"
+              name="Configuration"
+              parent="menu_scr_root"
+              sequence="90"
+              groups="smart_callback_routing.group_scr_manager"/>
+
+    <menuitem id="menu_scr_extensions"
+              name="Extensions"
+              parent="menu_scr_config"
+              action="action_scr_extension"
+              sequence="10"/>
+
+    <menuitem id="menu_scr_settings"
+              name="Settings"
+              parent="menu_scr_config"
+              action="base_setup.action_general_configuration"
+              sequence="30"/>
+
+</odoo>

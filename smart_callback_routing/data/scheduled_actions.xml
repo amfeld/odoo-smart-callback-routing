@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Cleans up expired sticky mappings (NFR-005 / GDPR).
+         Runs every 30 minutes by default. -->
+    <record id="ir_cron_scr_cleanup_expired" model="ir.cron">
+        <field name="name">Smart Callback Routing: Clean up expired mappings</field>
+        <field name="model_id" ref="model_scr_callback_route"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_cleanup_expired()</field>
+        <field name="interval_number">30</field>
+        <field name="interval_type">minutes</field>
+        <field name="active" eval="True"/>
+    </record>
+</odoo>
