@@ -3,7 +3,7 @@
      xmlns:xsd="http://www.w3.org/2001/XMLSchema"
      Country="[country]"
      Name="3cxodoo"
-     Version="4"
+     Version="5"
      SupportsEmojis="true"
      SupportsTranscription="true">
 
@@ -185,12 +185,15 @@
 
     <Scenario Id="ReportCall" Type="REST">
 
-      <!-- SkipIf: compare word literals (Inbound/Missed) WITHOUT quotes, as in
-           the official 3CX templates. With &quot;...&quot; the comparison never
-           matches -> inbound calls would wrongly be sent along (Odoo ignores
-           them, but it is unnecessary traffic + log noise). -->
+      <!-- Report ALL call types to Odoo; the server decides what qualifies (it
+           ignores non-outbound events and anonymous numbers, and only creates a
+           mapping for real outbound attempts). Do NOT filter by [CallType] here:
+           3CX's label for an UNANSWERED OUTBOUND call varies between setups
+           (Notanswered vs. Missed) — skipping the wrong one silently stops the
+           callback mapping from being created, which is exactly the case sticky
+           routing needs. Only gate on the feature toggle + the API key. -->
       <Request
-          SkipIf="[ReportCallEnabled]!=True||[scrapikey]==&quot;&quot;||[CallType]==Inbound||[CallType]==Missed"
+          SkipIf="[ReportCallEnabled]!=True||[scrapikey]==&quot;&quot;"
           Url="[hostodoo]/api/3cx/outbound"
           RequestContentType="application/json"
           RequestEncoding="Json"

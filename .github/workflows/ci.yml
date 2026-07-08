@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main, v19]
+  pull_request:
+    branches: [main, v19]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      db:
+        image: postgres:16
+        env:
+          POSTGRES_USER: odoo
+          POSTGRES_PASSWORD: odoo
+          POSTGRES_DB: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install & test the module on Odoo 19 (Community)
+        run: |
+          docker run --rm --network host \
+            -v "${{ github.workspace }}:/mnt/extra-addons:ro" \
+            odoo:19 \
+            odoo -d ci_test -i smart_callback_routing \
+              --test-enable --test-tags /smart_callback_routing \
+              --stop-after-init --without-demo=all \
+              --db_host 127.0.0.1 --db_port 5432 \
+              --db_user odoo --db_password odoo \
+              --addons-path=/usr/lib/python3/dist-packages/odoo/addons,/mnt/extra-addons

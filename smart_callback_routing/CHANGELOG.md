@@ -42,8 +42,13 @@ follows the Odoo manifest (`19.0.major.minor.patch`).
   (`docs/3cx_cfd/3cx_odoo_v20.xml`, identical to `3cxcrm/upload_on_3cx_pbx/`).
   It serves both modules: `apikey` → contact lookup (3cxcrm), `scrapikey` →
   outbound journaling for this module. The unused key may stay empty.
-  Template v4: `SkipIf` word comparisons without quotes
-  (`[CallType]==Inbound`), otherwise the journaling wrongly fires on inbound too.
+  Template v5: `ReportCall` reports **all** call types and lets the Odoo endpoint
+  decide what qualifies (it ignores non-outbound events and anonymous numbers).
+  Do not filter by `[CallType]` in the template: 3CX labels an unanswered
+  outbound call as `Notanswered` **or** `Missed` depending on the setup, so
+  skipping `Missed` silently dropped the callback mapping for unanswered
+  outbound calls — the exact case sticky routing needs. (v4 introduced that skip;
+  v5 reverts it.)
 - Effectiveness matrix (Odoo vs. 3CX control), kill switch and DID filter
   documented in `docs/3cx_cfd/README.md`; `CONFIG_GUIDE` slimmed down accordingly.
 - English source strings (Odoo i18n standard) with a German `i18n/de.po`;

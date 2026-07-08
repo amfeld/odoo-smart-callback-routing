@@ -1,0 +1,33 @@
+name: Bug report
+description: Report a problem with the module
+labels: ["bug"]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: Describe the bug and what you expected instead.
+    validations:
+      required: true
+  - type: input
+    id: versions
+    attributes:
+      label: Versions
+      description: Odoo edition & version (e.g. 19.0 Community), module version, 3CX version.
+      placeholder: "Odoo 19.0 Enterprise · module 19.0.2.0.0 · 3CX V20"
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Outbound call from extension ...
+        2. Contact calls back ...
+        3. ...
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs
+      description: Odoo server log and/or the entry from Callback Routing → Routing Log.
+      render: shell
