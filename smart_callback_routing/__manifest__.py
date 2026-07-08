@@ -1,6 +1,6 @@
 {
     'name': 'Smart Callback Routing (3CX)',
-    'version': '19.0.2.0.0',
+    'version': '19.0.2.0.1',
     'category': 'AMF',
     'application': True,
     'summary': 'Temporary callback-affinity routing between 3CX and Odoo: '

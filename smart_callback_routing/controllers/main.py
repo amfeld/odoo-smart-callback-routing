@@ -125,11 +125,17 @@ class SmartCallbackController(http.Controller):
             extension = str(payload.get('extension', '')).strip()
             raw_number = payload.get('number') or payload.get('callee') or payload.get('callerid')
             call_id = payload.get('call_id') or payload.get('callid')
+            # DIAGNOSTIC (temporary): keep the raw 3CX CallType in the log detail so
+            # we can tell a real outbound apart from a queue-answered inbound that
+            # 3CX also reports to this endpoint. Remove once the CallType semantics
+            # for this PBX are confirmed.
+            raw_calltype = str(payload.get('calltype') or payload.get('event') or '').strip()
 
             if event not in QUALIFYING_OUTBOUND_EVENTS or not extension:
                 Log.record({
                     'event': 'outbound', 'decision': 'ignored', 'extension': extension,
-                    'raw_callerid': raw_number, 'detail': f'Event "{event}" is not qualifying.',
+                    'raw_callerid': raw_number,
+                    'detail': f'[calltype={raw_calltype}] event "{event}" is not qualifying.',
                 })
                 return self._json({'status': 'ignored', 'reason': 'non_qualifying_event'})
 
@@ -137,7 +143,8 @@ class SmartCallbackController(http.Controller):
             if not phone:
                 Log.record({
                     'event': 'outbound', 'decision': 'ignored', 'extension': extension,
-                    'raw_callerid': raw_number, 'detail': 'Anonymous/invalid number.',
+                    'raw_callerid': raw_number,
+                    'detail': f'[calltype={raw_calltype}] anonymous/invalid number.',
                 })
                 return self._json({'status': 'ignored', 'reason': 'invalid_number'})
 
@@ -149,7 +156,8 @@ class SmartCallbackController(http.Controller):
                 'event': 'outbound', 'decision': 'created', 'phone_normalized': phone,
                 'raw_callerid': raw_number, 'extension': extension,
                 'company_id': company.id,
-                'detail': f'Mapping until {route.expires_at} (call {call_id or "-"}).',
+                'detail': f'[calltype={raw_calltype}] mapping until {route.expires_at} '
+                          f'(call {call_id or "-"}).',
             })
             return self._json({
                 'status': 'ok',

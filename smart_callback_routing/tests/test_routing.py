@@ -49,6 +49,26 @@ class TestSmartCallbackRouting(common.TransactionCase):
         self.assertGreaterEqual(deleted, 1)
         self.assertFalse(route.exists())
 
+    def test_register_reactivates_archived_mapping(self):
+        # Regression: an archived (active=False) mapping must be reactivated by a
+        # new outbound, not blocked by the UNIQUE(phone, company) constraint.
+        route = self.Route.register_outbound(self.phone, '105', self.company)
+        route.active = False
+        again = self.Route.register_outbound(self.phone, '106', self.company)
+        self.assertEqual(again, route)          # same row, no constraint violation
+        self.assertTrue(again.active)           # reactivated
+        self.assertEqual(again.extension, '106')
+        self.assertEqual(
+            self.Route.with_context(active_test=False).search_count(
+                [('phone_normalized', '=', self.phone)]), 1)
+
+    def test_cleanup_removes_archived_expired(self):
+        route = self.Route.register_outbound(self.phone, '105', self.company)
+        route.write({'active': False,
+                     'expires_at': fields.Datetime.now() - timedelta(minutes=1)})
+        self.Route._cron_cleanup_expired()
+        self.assertFalse(route.with_context(active_test=False).exists())
+
     def test_extension_link_computed(self):
         ext = self.Extension.create({'name': '105', 'company_id': self.company.id})
         route = self.Route.register_outbound(self.phone, '105', self.company)

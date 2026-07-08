@@ -162,7 +162,11 @@ class ScrCallbackRoute(models.Model):
         now = fields.Datetime.now()
         expires_at = now + timedelta(minutes=self._get_ttl_minutes())
 
-        existing = self.search([
+        # active_test=False: also find an ARCHIVED (active=False) mapping for this
+        # number. Otherwise the default search skips it, create() then hits the
+        # UNIQUE(phone_normalized, company_id) constraint, and re-tracking the
+        # number silently fails. Writing active=True below reactivates it.
+        existing = self.with_context(active_test=False).search([
             ('phone_normalized', '=', phone_normalized),
             ('company_id', '=', company.id),
         ], limit=1)
@@ -207,7 +211,9 @@ class ScrCallbackRoute(models.Model):
     def _cron_cleanup_expired(self):
         """Deletes expired mappings. Called by the cron job."""
         now = fields.Datetime.now()
-        expired = self.search([('expires_at', '<=', now)])
+        # active_test=False: also purge ARCHIVED expired mappings, which the
+        # default search would skip (they would otherwise accumulate forever).
+        expired = self.with_context(active_test=False).search([('expires_at', '<=', now)])
         count = len(expired)
         if expired:
             expired.unlink()

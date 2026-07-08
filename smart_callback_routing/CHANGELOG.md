@@ -6,6 +6,24 @@ follows the Odoo manifest (`19.0.major.minor.patch`).
 
 ---
 
+## [19.0.2.0.1]
+
+### Fixed
+- **Archived mapping blocked re-tracking of that number.** `register_outbound`
+  searched with the default context, which excludes archived (`active=False`)
+  records; `create()` then hit the `UNIQUE(phone_normalized, company_id)`
+  constraint and the outbound was silently dropped. It now searches with
+  `active_test=False` and reactivates the archived row. The cleanup cron likewise
+  purges archived expired mappings (they would otherwise accumulate).
+
+### Diagnostics
+- The outbound endpoint now records the raw 3CX `CallType` in the routing-log
+  detail (`[calltype=…]`) to distinguish a real outbound from a queue-answered
+  inbound that 3CX also reports here. Temporary — to be removed once the CallType
+  semantics for the target PBX are confirmed.
+
+---
+
 ## [19.0.2.0.0]
 
 ### Added
