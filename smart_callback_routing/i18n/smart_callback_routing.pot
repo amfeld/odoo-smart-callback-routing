@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 19.0+e-20260603\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-08 05:08+0000\n"
-"PO-Revision-Date: 2026-07-08 05:08+0000\n"
+"POT-Creation-Date: 2026-07-09 22:12+0000\n"
+"PO-Revision-Date: 2026-07-09 22:12+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -67,6 +67,11 @@ msgid "Active Mappings"
 msgstr ""
 
 #. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_callback_route__agent_name
+msgid "Agent"
+msgstr ""
+
+#. module: smart_callback_routing
 #: model:ir.model.constraint,message:smart_callback_routing.constraint_scr_extension_unique_name_company
 msgid "An extension may exist only once per company."
 msgstr ""
@@ -117,6 +122,16 @@ msgstr ""
 #. module: smart_callback_routing
 #: model:ir.ui.menu,name:smart_callback_routing.menu_scr_config
 msgid "Configuration"
+msgstr ""
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_callback_route__partner_id
+msgid "Contact"
+msgstr ""
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_callback_route__contact_name
+msgid "Contact Name"
 msgstr ""
 
 #. module: smart_callback_routing
@@ -189,6 +204,13 @@ msgid "Display Name"
 msgstr ""
 
 #. module: smart_callback_routing
+#: model:ir.model.fields,help:smart_callback_routing.field_scr_callback_route__contact_name
+msgid ""
+"Display name of the matched contact — or, if the CRM app is installed and "
+"only a lead matches, the lead name."
+msgstr ""
+
+#. module: smart_callback_routing
 #: model:ir.model.fields.selection,name:smart_callback_routing.selection__scr_extension__presence_state__dnd
 msgid "Do Not Disturb (DND)"
 msgstr ""
@@ -246,6 +268,14 @@ msgstr ""
 msgid ""
 "Extensions are created automatically as soon as 3CX reports\n"
 "               presence or outbound events. Here they can be mapped to employees."
+msgstr ""
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,help:smart_callback_routing.field_scr_callback_route__partner_id
+msgid ""
+"External contact matched to the stored number (res.partner). Not stored — "
+"resolved on demand, so it stays current and the mapping needs no contact to "
+"exist when it is created."
 msgstr ""
 
 #. module: smart_callback_routing
@@ -401,6 +431,13 @@ msgstr ""
 #. module: smart_callback_routing
 #: model:ir.model.fields,help:smart_callback_routing.field_scr_callback_route__expires_at
 msgid "Moment at which the mapping expires (end of TTL)."
+msgstr ""
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,help:smart_callback_routing.field_scr_callback_route__agent_name
+msgid ""
+"Name of the employee mapped to the extension, or the extension number itself"
+" if no employee is linked."
 msgstr ""
 
 #. module: smart_callback_routing

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: smart_callback_routing\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-08 05:08+0000\n"
+"POT-Creation-Date: 2026-07-09 22:12+0000\n"
 "PO-Revision-Date: 2026-07-08 05:08+0000\n"
 "Last-Translator: \n"
 "Language-Team: German\n"
@@ -70,6 +70,11 @@ msgid "Active Mappings"
 msgstr "Aktive Zuordnungen"
 
 #. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_callback_route__agent_name
+msgid "Agent"
+msgstr "Agent"
+
+#. module: smart_callback_routing
 #: model:ir.model.constraint,message:smart_callback_routing.constraint_scr_extension_unique_name_company
 msgid "An extension may exist only once per company."
 msgstr "Eine Nebenstelle darf je Unternehmen nur einmal existieren."
@@ -123,6 +128,16 @@ msgid "Configuration"
 msgstr "Konfiguration"
 
 #. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_callback_route__partner_id
+msgid "Contact"
+msgstr "Kontakt"
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,field_description:smart_callback_routing.field_scr_callback_route__contact_name
+msgid "Contact Name"
+msgstr "Kontaktname"
+
+#. module: smart_callback_routing
 #: model:ir.model.fields,help:smart_callback_routing.field_res_config_settings__scr_default_country_prefix
 msgid ""
 "Country prefix without \"+\", applied to national numbers (leading 0). "
@@ -133,8 +148,8 @@ msgstr ""
 #. module: smart_callback_routing
 #: model_terms:ir.ui.view,arch_db:smart_callback_routing.res_config_settings_view_form_scr
 msgid ""
-"Country prefix without '+', applied to national numbers (leading 0). Germany"
-" = 49."
+"Country prefix without '+', applied to national numbers (leading 0). Germany "
+"= 49."
 msgstr ""
 "Ländervorwahl ohne '+', die auf nationale Nummern (führende 0) angewandt "
 "wird. DE = 49."
@@ -195,6 +210,15 @@ msgid "Display Name"
 msgstr "Anzeigename"
 
 #. module: smart_callback_routing
+#: model:ir.model.fields,help:smart_callback_routing.field_scr_callback_route__contact_name
+msgid ""
+"Display name of the matched contact — or, if the CRM app is installed and "
+"only a lead matches, the lead name."
+msgstr ""
+"Anzeigename des zugeordneten Kontakts — oder, falls die CRM-App installiert "
+"ist und nur ein Lead passt, der Lead-Name."
+
+#. module: smart_callback_routing
 #: model:ir.model.fields.selection,name:smart_callback_routing.selection__scr_extension__presence_state__dnd
 msgid "Do Not Disturb (DND)"
 msgstr "Nicht stören (DND)"
@@ -251,10 +275,23 @@ msgstr "Nebenstellen"
 #: model_terms:ir.actions.act_window,help:smart_callback_routing.action_scr_extension
 msgid ""
 "Extensions are created automatically as soon as 3CX reports\n"
-"               presence or outbound events. Here they can be mapped to employees."
+"               presence or outbound events. Here they can be mapped to "
+"employees."
 msgstr ""
 "Nebenstellen werden automatisch angelegt, sobald 3CX Presence- oder\n"
-"               Outbound-Events meldet. Hier können sie Mitarbeitern zugeordnet werden."
+"               Outbound-Events meldet. Hier können sie Mitarbeitern "
+"zugeordnet werden."
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,help:smart_callback_routing.field_scr_callback_route__partner_id
+msgid ""
+"External contact matched to the stored number (res.partner). Not stored — "
+"resolved on demand, so it stays current and the mapping needs no contact to "
+"exist when it is created."
+msgstr ""
+"Externer Kontakt, der zur gespeicherten Nummer passt (res.partner). Nicht "
+"gespeichert — wird bei Bedarf aufgelöst, bleibt so aktuell, und die Zuordnung "
+"braucht bei ihrer Erstellung keinen existierenden Kontakt."
 
 #. module: smart_callback_routing
 #: model:ir.model.fields,field_description:smart_callback_routing.field_scr_routing_log__fallback_reason
@@ -283,8 +320,8 @@ msgstr "HMAC-Signing-Secret (optional)"
 msgid ""
 "How long a phone-number→extension mapping stays valid (default 120 = 2 h)."
 msgstr ""
-"Wie lange eine Telefonnummer→Extension-Zuordnung gültig bleibt (Default 120 ="
-" 2 h)."
+"Wie lange eine Telefonnummer→Extension-Zuordnung gültig bleibt (Default 120 "
+"= 2 h)."
 
 #. module: smart_callback_routing
 #: model:ir.model.fields,help:smart_callback_routing.field_res_config_settings__scr_first_ring_timeout
@@ -305,8 +342,8 @@ msgstr "ID"
 #. module: smart_callback_routing
 #: model_terms:ir.ui.view,arch_db:smart_callback_routing.res_config_settings_view_form_scr
 msgid ""
-"If set, requests must additionally carry an HMAC-SHA256 signature in the "
-"'X-Signature' header."
+"If set, requests must additionally carry an HMAC-SHA256 signature in the 'X-"
+"Signature' header."
 msgstr ""
 "Wenn gesetzt, müssen Anfragen zusätzlich eine HMAC-SHA256-Signatur im Header "
 "'X-Signature' tragen."
@@ -314,11 +351,11 @@ msgstr ""
 #. module: smart_callback_routing
 #: model:ir.model.fields,help:smart_callback_routing.field_res_config_settings__scr_signing_secret
 msgid ""
-"If set, requests must additionally carry an HMAC-SHA256 signature of the raw"
-" body in the \"X-Signature\" header (SEC-003)."
+"If set, requests must additionally carry an HMAC-SHA256 signature of the raw "
+"body in the \"X-Signature\" header (SEC-003)."
 msgstr ""
-"Wenn gesetzt, müssen Anfragen zusätzlich im Header \"X-Signature\" eine "
-"HMAC-SHA256-Signatur des Rohbodys tragen (SEC-003)."
+"Wenn gesetzt, müssen Anfragen zusätzlich im Header \"X-Signature\" eine HMAC-"
+"SHA256-Signatur des Rohbodys tragen (SEC-003)."
 
 #. module: smart_callback_routing
 #: model:ir.model.fields.selection,name:smart_callback_routing.selection__scr_routing_log__decision__ignored
@@ -338,13 +375,13 @@ msgstr "Inbound-Lookup"
 #. module: smart_callback_routing
 #: model:ir.model.fields,help:smart_callback_routing.field_res_config_settings__scr_sticky_disabled
 msgid ""
-"Kill switch: while active, the routing API always answers with \"default\" —"
-" 3CX routes normally everywhere, without touching the phone system. Outbound"
-" mappings are still recorded."
+"Kill switch: while active, the routing API always answers with \"default\" — "
+"3CX routes normally everywhere, without touching the phone system. Outbound "
+"mappings are still recorded."
 msgstr ""
-"Not-Aus: Solange aktiv, antwortet die Routing-API immer mit \"default\" — 3CX"
-" routet überall normal, ohne Eingriff in die Telefonanlage. "
-"Outbound-Zuordnungen werden weiterhin erfasst."
+"Not-Aus: Solange aktiv, antwortet die Routing-API immer mit \"default\" — "
+"3CX routet überall normal, ohne Eingriff in die Telefonanlage. Outbound-"
+"Zuordnungen werden weiterhin erfasst."
 
 #. module: smart_callback_routing
 #: model:ir.model.fields,field_description:smart_callback_routing.field_scr_callback_route__last_call_id
@@ -374,8 +411,7 @@ msgstr "Latenz (ms)"
 #: model:ir.model.fields,help:smart_callback_routing.field_scr_callback_route__extension_id
 msgid ""
 "Linked extension record (for presence checks & transparency). Not stored — "
-"resolved on demand, because extensions may be created only after the "
-"mapping."
+"resolved on demand, because extensions may be created only after the mapping."
 msgstr ""
 "Verknüpfter Nebenstellen-Datensatz (für Presence-Prüfung & Transparenz). "
 "Nicht gespeichert — wird bei Bedarf frisch aufgelöst, da Nebenstellen auch "
@@ -425,6 +461,15 @@ msgstr ""
 #: model:ir.model.fields,help:smart_callback_routing.field_scr_callback_route__expires_at
 msgid "Moment at which the mapping expires (end of TTL)."
 msgstr "Zeitpunkt, ab dem die Zuordnung verfällt (TTL-Ende)."
+
+#. module: smart_callback_routing
+#: model:ir.model.fields,help:smart_callback_routing.field_scr_callback_route__agent_name
+msgid ""
+"Name of the employee mapped to the extension, or the extension number itself "
+"if no employee is linked."
+msgstr ""
+"Name des der Nebenstelle zugeordneten Mitarbeiters, oder die "
+"Nebenstellennummer selbst, wenn kein Mitarbeiter verknüpft ist."
 
 #. module: smart_callback_routing
 #: model_terms:ir.actions.act_window,help:smart_callback_routing.action_scr_callback_route
@@ -646,8 +691,7 @@ msgstr "Gültig (nicht abgelaufen)"
 
 #. module: smart_callback_routing
 #: model:ir.model.fields,help:smart_callback_routing.field_res_config_settings__scr_ttl_minutes
-msgid ""
-"Validity period of a phone-number→extension mapping. Default 120 (2 h)."
+msgid "Validity period of a phone-number→extension mapping. Default 120 (2 h)."
 msgstr ""
 "Gültigkeitsdauer einer Telefonnummer→Extension-Zuordnung. Default 120 (2 h)."
 
@@ -664,8 +708,8 @@ msgid ""
 "mappings are still recorded."
 msgstr ""
 "Solange aktiv, antwortet die Routing-API immer mit 'default' — 3CX routet "
-"überall normal, ohne jede Änderung an der Telefonanlage. "
-"Outbound-Zuordnungen werden weiterhin erfasst."
+"überall normal, ohne jede Änderung an der Telefonanlage. Outbound-"
+"Zuordnungen werden weiterhin erfasst."
 
 #. module: smart_callback_routing
 #: model_terms:ir.ui.view,arch_db:smart_callback_routing.res_config_settings_view_form_scr

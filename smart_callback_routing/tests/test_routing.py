@@ -74,6 +74,29 @@ class TestSmartCallbackRouting(common.TransactionCase):
         route = self.Route.register_outbound(self.phone, '105', self.company)
         self.assertEqual(route.extension_id, ext)
 
+    def test_contact_lookup_resolves_partner(self):
+        partner = self.env['res.partner'].create(
+            {'name': 'Callback Tester', 'phone': self.phone})
+        route = self.Route.register_outbound(self.phone, '105', self.company)
+        self.assertEqual(route.partner_id, partner)
+        self.assertEqual(route.contact_name, partner.display_name)
+
+    def test_contact_lookup_no_match(self):
+        route = self.Route.register_outbound('+491700000009', '105', self.company)
+        self.assertFalse(route.partner_id)
+        self.assertEqual(route.contact_name, '')
+
+    def test_agent_name_falls_back_to_extension(self):
+        route = self.Route.register_outbound(self.phone, '105', self.company)
+        # No scr.extension / employee yet → raw extension number.
+        self.assertEqual(route.agent_name, '105')
+        employee = self.env['hr.employee'].create({'name': 'Verena Portz'})
+        self.Extension.create({
+            'name': '105', 'company_id': self.company.id,
+            'employee_id': employee.id})
+        route.invalidate_recordset(['agent_name'])
+        self.assertEqual(route.agent_name, 'Verena Portz')
+
     def test_availability_skip_offline(self):
         self.env['ir.config_parameter'].sudo().set_param(
             'smart_callback_routing.skip_offline', '1')

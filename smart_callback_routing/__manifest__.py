@@ -1,6 +1,6 @@
 {
     'name': 'Smart Callback Routing (3CX)',
-    'version': '19.0.2.0.1',
+    'version': '19.0.2.1.0',
     'category': 'AMF',
     'application': True,
     'summary': 'Temporary callback-affinity routing between 3CX and Odoo: '
@@ -10,8 +10,10 @@
     'website': 'https://github.com/amfeld/odoo-smart-callback-routing',
     'depends': [
         'base',
-        'base_setup',   # res.config.settings view framework
-        'hr',           # scr.extension.employee_id → hr.employee (optional mapping)
+        'base_setup',       # res.config.settings view framework
+        'hr',               # scr.extension.employee_id → hr.employee (optional mapping)
+        'phone_validation',  # phone_mobile_search for the contact lookup (already
+                             # transitive via hr; declared explicitly for clarity)
     ],
     'data': [
         'security/security.xml',

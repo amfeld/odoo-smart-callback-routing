@@ -6,6 +6,20 @@ follows the Odoo manifest (`19.0.major.minor.patch`).
 
 ---
 
+## [19.0.2.1.0]
+
+### Added
+- **Contact lookup in Active Callback Mappings.** Each mapping now resolves the
+  external caller from its stored number and shows the contact name (and a
+  clickable `res.partner` link) — no more bare phone numbers in the monitoring
+  list. Non-stored computed (`partner_id` + `contact_name`), live via the standard
+  `phone_mobile_search`; falls back to a `crm.lead` name only if the CRM app is
+  installed (soft, no hard `crm` dependency). +2 tests.
+- Declared `phone_validation` explicitly in the manifest (already transitive via
+  `hr`) — it provides `phone_mobile_search` on `res.partner`.
+
+---
+
 ## [19.0.2.0.1]
 
 ### Fixed

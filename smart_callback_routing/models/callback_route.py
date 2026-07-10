@@ -74,6 +74,26 @@ class ScrCallbackRoute(models.Model):
         search='_search_is_valid',
         help='True as long as the mapping is active and not expired.',
     )
+    partner_id = fields.Many2one(
+        comodel_name='res.partner',
+        string='Contact',
+        compute='_compute_contact',
+        help='External contact matched to the stored number (res.partner). '
+             'Not stored — resolved on demand, so it stays current and the '
+             'mapping needs no contact to exist when it is created.',
+    )
+    contact_name = fields.Char(
+        string='Contact Name',
+        compute='_compute_contact',
+        help='Display name of the matched contact — or, if the CRM app is '
+             'installed and only a lead matches, the lead name.',
+    )
+    agent_name = fields.Char(
+        string='Agent',
+        compute='_compute_agent_name',
+        help='Name of the employee mapped to the extension, or the extension '
+             'number itself if no employee is linked.',
+    )
 
     _unique_phone_company = models.Constraint(
         'UNIQUE(phone_normalized, company_id)',
@@ -96,6 +116,48 @@ class ScrCallbackRoute(models.Model):
             ('name', '=', self.extension),
             ('company_id', '=', self.company_id.id),
         ], limit=1)
+
+    @api.depends('phone_normalized')
+    def _compute_contact(self):
+        for route in self:
+            partner, name = route._resolve_contact()
+            route.partner_id = partner.id or False
+            route.contact_name = name
+
+    def _resolve_contact(self):
+        """Resolves the external caller from the stored number (live, best-effort).
+
+        Returns a ``(res.partner recordset, display name)`` tuple. Matches
+        ``res.partner`` via the standard ``phone_mobile_search`` field; if the
+        CRM app is installed and only a ``crm.lead`` matches, returns an empty
+        partner with the lead name. Never raises — caller identification must
+        not break the monitoring list.
+        """
+        self.ensure_one()
+        Partner = self.env['res.partner']
+        number = self.phone_normalized
+        if not number:
+            return Partner, ''
+        partner = Partner.search(
+            [('phone_mobile_search', 'ilike', number)], limit=1)
+        if partner:
+            return partner, partner.display_name
+        # crm.lead only if the CRM app is installed; sudo for best-effort caller
+        # identification, since monitoring users may lack CRM access.
+        if 'crm.lead' in self.env:
+            lead = self.env['crm.lead'].sudo().search(
+                [('phone_mobile_search', 'ilike', number)], limit=1)
+            if lead:
+                return Partner, lead.contact_name or lead.partner_name or lead.name or ''
+        return Partner, ''
+
+    @api.depends('extension', 'company_id')
+    def _compute_agent_name(self):
+        for route in self:
+            # sudo: show the linked employee's name even if the monitoring user
+            # has no HR access; falls back to the raw extension number.
+            employee = route._resolve_extension().sudo().employee_id
+            route.agent_name = employee.name or route.extension or ''
 
     @property
     def is_expired(self):
