@@ -39,4 +39,7 @@ jobs:
             2>&1 | tee /tmp/odoo-ci.log
 
       - name: Assert test result
-        run: grep -E "odoo\.tests\.result: 0 failed, 0 error" /tmp/odoo-ci.log
+        # Block scalar on purpose: a plain-style `run:` value containing
+        # "colon + space" is invalid YAML and makes the whole workflow unparsable.
+        run: |
+          grep -E "odoo\.tests\.result: 0 failed, 0 error" /tmp/odoo-ci.log
