@@ -9,6 +9,11 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    # Run the job inside the official Odoo Community image — no docker-in-docker,
+    # no host networking. The postgres service is reachable as hostname "db".
+    container:
+      image: odoo:19
+      options: --user root
     services:
       db:
         image: postgres:16
@@ -16,8 +21,6 @@ jobs:
           POSTGRES_USER: odoo
           POSTGRES_PASSWORD: odoo
           POSTGRES_DB: postgres
-        ports:
-          - 5432:5432
         options: >-
           --health-cmd pg_isready
           --health-interval 10s
@@ -28,12 +31,12 @@ jobs:
 
       - name: Install & test the module on Odoo 19 (Community)
         run: |
-          docker run --rm --network host \
-            -v "${{ github.workspace }}:/mnt/extra-addons:ro" \
-            odoo:19 \
-            odoo -d ci_test -i smart_callback_routing \
-              --test-enable --test-tags /smart_callback_routing \
-              --stop-after-init --without-demo=all \
-              --db_host 127.0.0.1 --db_port 5432 \
-              --db_user odoo --db_password odoo \
-              --addons-path=/usr/lib/python3/dist-packages/odoo/addons,/mnt/extra-addons
+          odoo -d ci_test -i smart_callback_routing \
+            --test-enable --test-tags /smart_callback_routing \
+            --stop-after-init --without-demo \
+            --db_host db --db_user odoo --db_password odoo \
+            --addons-path=/usr/lib/python3/dist-packages/odoo/addons,"$GITHUB_WORKSPACE" \
+            2>&1 | tee /tmp/odoo-ci.log
+
+      - name: Assert test result
+        run: grep -E "odoo\.tests\.result: 0 failed, 0 error" /tmp/odoo-ci.log
