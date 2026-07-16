@@ -292,6 +292,4 @@ Die vollständige Anleitung inklusive Beispiel-Deployment steht in
 
 ---
 
-*Stand: Modulversion 19.0.2.0.0. Screenshots der genannten Masken sind noch offen
-(TODO) und können bei einer späteren Überarbeitung aus der laufenden Instanz
-ergänzt werden.*
+*Stand: Modulversion 19.0.2.1.0.*
